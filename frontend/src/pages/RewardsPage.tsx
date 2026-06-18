@@ -88,7 +88,7 @@ const RewardsPage = () => {
 
     let donorId: string | null = null;
     try { const raw = localStorage.getItem('bloodconnect_user'); const parsed = raw ? JSON.parse(raw) : {}; donorId = parsed?.id || parsed?._id || null; } catch {}
-    const API_BASE = (import.meta as any).env?.VITE_API_BASE || (import.meta as any).env?.VITE_API_URL || '/api';
+    const API_BASE = import.meta.env.VITE_API_URL || '/api';
 
     try {
       const token = localStorage.getItem('bloodconnect_token');

@@ -25,7 +25,7 @@ const VolunteerMetrics: React.FC = () => {
     // drill into reports for this date
     const month = 'Feb';
     navigate('/app/analytics');
-    const apiBase = import.meta.env.VITE_API_BASE || import.meta.env.VITE_API_URL || '/api';
+    const apiBase = import.meta.env.VITE_API_URL || '/api';
     try { window.open(`${apiBase}/reports/drilldown?month=${month}&type=volunteer`); } catch (e) {}
   };
 
