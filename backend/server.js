@@ -33,6 +33,7 @@ const allowedOrigins = new Set([
   'http://localhost:4177',
   'https://bc-crm-final-2026.vercel.app',
   'https://bc-crm-final-2026-2.onrender.com',
+  'https://bc-crm-final-2026-3.onrender.com',
 ]);
 
 if (process.env.FRONTEND_URL) {
