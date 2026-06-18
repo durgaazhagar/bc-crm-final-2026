@@ -32,20 +32,28 @@ const allowedOrigins = new Set([
   'http://localhost:4174',
   'http://localhost:4177',
   'https://bc-crm-final-2026.vercel.app',
-  'https://bc-crm-final-2026-2.onrender.com',
-  'https://bc-crm-final-2026-3.onrender.com',
 ]);
 
 if (process.env.FRONTEND_URL) {
   allowedOrigins.add(process.env.FRONTEND_URL);
 }
 
+if (process.env.CORS_ORIGIN) {
+  process.env.CORS_ORIGIN.split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean)
+    .forEach((origin) => allowedOrigins.add(origin));
+}
+
+const renderOriginRegex = /^https:\/\/[a-z0-9-]+\.onrender\.com$/;
+
 app.use(cors({
   origin: (origin, callback) => {
     // Allow non-browser requests like curl/servers (no origin)
     if (!origin) return callback(null, true);
     if (allowedOrigins.has(origin)) return callback(null, true);
-    return callback(new Error('CORS policy: origin not allowed'), false);
+    if (renderOriginRegex.test(origin)) return callback(null, true);
+    return callback(new Error(`CORS policy: origin not allowed (${origin})`), false);
   },
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
   credentials: true,
