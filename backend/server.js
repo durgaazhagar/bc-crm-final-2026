@@ -4,60 +4,34 @@ const dotenv = require('dotenv');
 const path = require('path');
 const connectDB = require('./config/db');
 
-const envPath = path.resolve(__dirname, '.env');
-const dotenvResult = dotenv.config({ path: envPath });
-if (dotenvResult.error) {
-  console.warn(`Warning: could not load backend environment file at ${envPath}.`);
-  console.warn('Make sure backend/.env exists and the process has access to it.');
-}
-
-console.log('='.repeat(60));
-console.log('BloodConnect CRM - Backend Initialization');
-console.log('='.repeat(60));
-console.log('PORT:', process.env.PORT || 'Not set (default: 5010)');
-console.log('NODE_ENV:', process.env.NODE_ENV || 'development');
-console.log('MONGO_URI:', process.env.MONGO_URI ? '✓ Configured (Atlas/URI)' : '✗ Not configured');
-console.log('AUTH_FALLBACK:', process.env.AUTH_FALLBACK === 'true' ? '✓ Enabled' : '✗ Disabled');
-console.log('='.repeat(60));
+dotenv.config({ path: path.join(__dirname, '.env') });
 
 const app = express();
-// Strict CORS for local development and known frontends
-// Configure CORS to allow the known frontend(s).
-// Use FRONTEND_URL env var when provided (recommended for production),
-// otherwise fall back to known local dev origins and the Vercel frontend.
-const allowedOrigins = new Set([
-  'http://localhost:5173',
-  'http://localhost:3000',
-  'http://localhost:4173',
-  'http://localhost:4174',
-  'http://localhost:4177',
-  'https://bc-crm-final-2026.vercel.app',
-]);
 
+const allowedOrigins = new Set();
 if (process.env.FRONTEND_URL) {
   allowedOrigins.add(process.env.FRONTEND_URL);
 }
-
 if (process.env.CORS_ORIGIN) {
   process.env.CORS_ORIGIN.split(',')
     .map((origin) => origin.trim())
     .filter(Boolean)
     .forEach((origin) => allowedOrigins.add(origin));
 }
-
 const renderOriginRegex = /^https:\/\/[a-z0-9-]+\.onrender\.com$/;
 
 app.use(cors({
   origin: (origin, callback) => {
-    // Allow non-browser requests like curl/servers (no origin)
     if (!origin) return callback(null, true);
-    if (allowedOrigins.has(origin)) return callback(null, true);
-    if (renderOriginRegex.test(origin)) return callback(null, true);
+    if (allowedOrigins.has(origin) || renderOriginRegex.test(origin)) {
+      return callback(null, true);
+    }
     return callback(new Error(`CORS policy: origin not allowed (${origin})`), false);
   },
-  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   credentials: true,
 }));
+
 app.use(express.json());
 app.use(require('./middleware/logger'));
 
@@ -75,7 +49,7 @@ app.get('/api/status', (req, res) => {
 });
 
 if (process.env.NODE_ENV === 'production') {
-  const frontendBuildPath = path.resolve(__dirname, process.env.FRONTEND_DIR || '../frontend/dist');
+  const frontendBuildPath = path.join(__dirname, '..', 'frontend', 'dist');
   console.log('Serving frontend from:', frontendBuildPath);
   app.use(express.static(frontendBuildPath));
 
@@ -84,48 +58,30 @@ if (process.env.NODE_ENV === 'production') {
       return next();
     }
     res.sendFile(path.join(frontendBuildPath, 'index.html'), (err) => {
-      if (err) next(err);
+      if (err) {
+        next(err);
+      }
     });
   });
 }
 
-// Start server with fallback: try env PORT, else default 5010.
-const DEFAULT_PORT = 5010;
-const requestedPort = parseInt(process.env.PORT, 10) || DEFAULT_PORT;
+const PORT = parseInt(process.env.PORT, 10) || 5010;
 
-// Try a sequence of ports (DEFAULT_PORT..DEFAULT_PORT+9) if the preferred one is in use.
-const MAX_ATTEMPTS = 10;
-
-const startServer = (port, attempt = 0) => {
+const startServer = (port) => {
   const srv = app.listen(port, () => {
     console.log(`BloodConnect CRM AI server running on port ${port}`);
   });
 
   srv.on('error', (err) => {
-    if (err && err.code === 'EADDRINUSE') {
-      if (attempt >= MAX_ATTEMPTS - 1) {
-        console.error(`Port ${port} already in use and no fallback available. Exiting.`);
-        process.exit(1);
-      }
-      const nextPort = DEFAULT_PORT + attempt + 1;
-      console.warn(`Port ${port} is in use — trying port ${nextPort} instead.`);
-      startServer(nextPort, attempt + 1);
-    } else {
-      console.error('Server error:', err);
-      process.exit(1);
-    }
+    console.error('Server error:', err);
+    process.exit(1);
   });
 };
 
-const startApp = async () => {
+(async () => {
   const dbConnected = await connectDB();
   if (!dbConnected) {
     console.error('⚠ MongoDB connection was not established. Auth fallback may be used if enabled.');
   }
-  startServer(requestedPort);
-};
-
-startApp().catch((err) => {
-  console.error('Fatal backend initialization error:', err);
-  process.exit(1);
-});
+  startServer(PORT);
+})();

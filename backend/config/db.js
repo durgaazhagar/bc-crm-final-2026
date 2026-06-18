@@ -68,8 +68,9 @@ const connectDB = async () => {
         useUnifiedTopology: true,
       });
       isConnected = true;
+      const dbName = conn.connection.db?.databaseName || conn.connection.name || 'unknown';
       console.log(`✅ MongoDB connected successfully on ${conn.connection.host}`);
-      console.log(`📊 Database: ${conn.connection.db.name}`);
+      console.log(`📊 Database: ${dbName}`);
       return true;
     } catch (error) {
       isConnected = false;
