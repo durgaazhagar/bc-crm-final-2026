@@ -89,7 +89,7 @@ const VolunteerRewards: React.FC = () => {
       } catch {
         donorId = null;
       }
-      const API_BASE = (import.meta as any).env?.VITE_API_BASE || 'http://localhost:5012';
+      const API_BASE = (import.meta as any).env?.VITE_API_BASE || (import.meta as any).env?.VITE_API_URL || '/api';
 
       try {
         // 1) POST /api/rewards/redeem

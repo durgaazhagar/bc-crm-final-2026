@@ -29,7 +29,7 @@ const DashboardReports: React.FC = () => {
 
   const data = useMemo(() => sampleMonths, []);
 
-  const API_BASE = (import.meta as any).env?.VITE_API_BASE || 'http://localhost:5012';
+  const API_BASE = (import.meta as any).env?.VITE_API_BASE || (import.meta as any).env?.VITE_API_URL || '/api';
 
   const doToast = (msg:string, type:'success'|'error'='success') => {
     setToast({msg,type});
