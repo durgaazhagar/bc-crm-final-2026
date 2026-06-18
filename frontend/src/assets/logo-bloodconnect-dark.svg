@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="520" height="160" viewBox="0 0 520 160" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="BloodConnect CRM logo - dark">
+  <defs>
+    <linearGradient id="gradientDrop" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#F87171" />
+      <stop offset="45%" stop-color="#EF4444" />
+      <stop offset="90%" stop-color="#FFFFFF" />
+    </linearGradient>
+    <linearGradient id="gradientRing" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#F43F5E" />
+      <stop offset="45%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#3B82F6" />
+    </linearGradient>
+    <linearGradient id="gradientText" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#F43F5E" />
+      <stop offset="60%" stop-color="#FEE2E2" />
+      <stop offset="100%" stop-color="#FFFFFF" />
+    </linearGradient>
+    <filter id="glowRing" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="0" stdDeviation="14" flood-color="#F87171" flood-opacity="0.18" />
+      <feDropShadow dx="0" dy="0" stdDeviation="24" flood-color="#60A5FA" flood-opacity="0.12" />
+    </filter>
+    <filter id="glowDrop" x="-45%" y="-45%" width="190%" height="190%">
+      <feDropShadow dx="0" dy="0" stdDeviation="12" flood-color="#FFFFFF" flood-opacity="0.24" />
+      <feDropShadow dx="0" dy="0" stdDeviation="24" flood-color="#F43F5E" flood-opacity="0.16" />
+    </filter>
+    <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#000000" flood-opacity="0.2" />
+    </filter>
+  </defs>
+
+  <g filter="url(#softShadow)">
+    <circle cx="96" cy="80" r="64" fill="none" stroke="url(#gradientRing)" stroke-width="9" opacity="0.85" />
+    <g stroke="url(#gradientRing)" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+      <path d="M157 80c0-43-35-78-78-78" />
+      <path d="M32 80c0 43 35 78 78 78" />
+      <path d="M42 46c13 14 34 28 62 30" />
+      <path d="M150 112c-14-16-36-30-64-32" />
+    </g>
+    <circle cx="150" cy="68" r="8" fill="#EF4444" stroke="#FFFFFF" stroke-width="2" />
+    <circle cx="56" cy="62" r="8" fill="#60A5FA" stroke="#FFFFFF" stroke-width="2" />
+    <circle cx="112" cy="32" r="8" fill="#F97316" stroke="#FFFFFF" stroke-width="2" />
+    <circle cx="64" cy="118" r="8" fill="#38BDF8" stroke="#FFFFFF" stroke-width="2" />
+    <circle cx="98" cy="146" r="8" fill="#FFFFFF" opacity="0.9" stroke="#FFFFFF" stroke-width="1" />
+  </g>
+
+  <g filter="url(#glowDrop)">
+    <path d="M96 32c20 20 30 38 30 58 0 16-12 32-30 32s-30-16-30-32c0-20 10-38 30-58z"
+          fill="url(#gradientDrop)" stroke="#FFFFFF" stroke-width="2" />
+    <path d="M96 56h-16v14h16v16h14v-16h16v-14h-16v-16h-14v16z" fill="#FFFFFF" />
+    <path d="M94 30c0 0 12 10 14 18 2 8 0 18-6 25s-20 14-20 14-14-8-18-20c-4-12-4-20 0-28s10-17 16-21c6-4 14-8 14-8z"
+          fill="#FFFFFF" opacity="0.1" />
+  </g>
+
+  <g transform="translate(210,18)">
+    <text x="0" y="42" font-family="Inter, Helvetica, Arial, sans-serif" font-size="42" font-weight="800" letter-spacing="-0.03em" fill="url(#gradientText)">BloodConnect</text>
+    <text x="0" y="80" font-family="Inter, Helvetica, Arial, sans-serif" font-size="22" font-weight="700" fill="#93C5FD">CRM</text>
+    <text x="0" y="108" font-family="Inter, Helvetica, Arial, sans-serif" font-size="12" fill="#E0F2FE" opacity="0.8">Emergency blood donation network • AI-powered matching</text>
+  </g>
+</svg>

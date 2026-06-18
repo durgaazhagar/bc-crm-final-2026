@@ -1,0 +1,16 @@
+{
+  "name": "bloodconnect-crm-ai",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm run dev\"",
+    "install-all": "npm install --prefix backend && npm install --prefix frontend",
+    "build": "npm --prefix frontend run build",
+    "start": "npm --prefix backend start",
+    "backend:start": "npm --prefix backend start",
+    "frontend:build": "npm --prefix frontend run build"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}

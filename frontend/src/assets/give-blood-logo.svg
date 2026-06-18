@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 120" fill="none">
+  <defs>
+    <linearGradient id="dropGradient" x1="50" y1="15" x2="110" y2="105" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F87171" />
+      <stop offset="100%" stop-color="#DC2626" />
+    </linearGradient>
+  </defs>
+  <g opacity="1">
+    <path d="M80 15C80 15 52 50 52 78.5C52 103.985 72.5147 124.5 98 124.5C123.485 124.5 144 103.985 144 78.5C144 50 116 15 116 15C116 15 104 4 98 4C92 4 80 15 80 15Z" fill="url(#dropGradient)" />
+    <path d="M103 44C103 40.6863 105.686 38 109 38H115C118.314 38 121 40.6863 121 44V50H127C130.314 50 133 52.6863 133 56V62C133 65.3137 130.314 68 127 68H121V74C121 77.3137 118.314 80 115 80H109C105.686 80 103 77.3137 103 74V68H97C93.6863 68 91 65.3137 91 62V56C91 52.6863 93.6863 50 97 50H103V44Z" fill="#ffffff" />
+  </g>
+  <text x="170" y="55" fill="#9CA3AF" font-family="Inter, Arial, sans-serif" font-weight="800" font-size="24" letter-spacing="2">GIVE</text>
+  <text x="170" y="90" fill="#DC2626" font-family="Inter, Arial, sans-serif" font-weight="800" font-size="32" letter-spacing="2">BLOOD</text>
+</svg>

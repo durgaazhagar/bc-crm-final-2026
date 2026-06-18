@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="520" height="140" viewBox="0 0 520 140" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="BloodConnect CRM logo - light">
+  <defs>
+    <linearGradient id="gRed" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#FF5A5F" />
+      <stop offset="100%" stop-color="#E53935" />
+    </linearGradient>
+    <linearGradient id="textGradient" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#FF7A7C" />
+      <stop offset="100%" stop-color="#D92B2B" />
+    </linearGradient>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#E53935" flood-opacity="0.18" />
+    </filter>
+  </defs>
+
+  <g transform="translate(18,8)" filter="url(#soft)">
+    <rect x="0" y="0" width="154" height="124" rx="34" fill="#FFFFFF" fill-opacity="0.92" stroke="#E5E7EB" stroke-opacity="0.22" />
+    <path d="M76 20c24 20 38 42 38 68 0 22-18 40-40 40s-40-18-40-40c0-26 14-48 38-68z"
+          fill="url(#gRed)" stroke="#ffffff" stroke-opacity="0.28" stroke-width="1.5" />
+    <path d="M76 24c18 14 28 30 28 50 0 16-14 30-30 30s-30-14-30-30c0-20 10-36 28-50z"
+          fill="#FFFFFF" opacity="0.14" />
+    <path d="M68 40c10 10 16 18 16 30 0 8-6 14-14 14s-14-6-14-14c0-12 6-20 12-30z"
+          fill="#FFFFFF" opacity="0.24" />
+    <g stroke="url(#gRed)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+      <line x1="44" y1="35" x2="74" y2="72" />
+      <line x1="118" y1="30" x2="74" y2="72" />
+      <line x1="126" y1="92" x2="74" y2="72" />
+      <line x1="28" y1="106" x2="74" y2="72" />
+      <line x1="96" y1="112" x2="74" y2="72" />
+    </g>
+    <circle cx="44" cy="35" r="5.5" fill="#FFFFFF" stroke="#E53935" stroke-width="1.8" />
+    <circle cx="118" cy="30" r="5.5" fill="#FFFFFF" stroke="#E53935" stroke-width="1.8" />
+    <circle cx="126" cy="92" r="5.5" fill="#FFFFFF" stroke="#E53935" stroke-width="1.8" />
+    <circle cx="28" cy="106" r="5.5" fill="#FFFFFF" stroke="#E53935" stroke-width="1.8" />
+    <circle cx="96" cy="112" r="5.5" fill="#FFFFFF" stroke="#E53935" stroke-width="1.8" />
+    <circle cx="74" cy="74" r="7" fill="#FFFFFF" opacity="0.08" />
+    <circle cx="74" cy="74" r="16" fill="none" stroke="#FFFFFF" stroke-opacity="0.12" stroke-width="1.5" />
+    <circle cx="82" cy="28" r="3" fill="#FFFFFF" opacity="0.9" />
+    <circle cx="110" cy="48" r="2.5" fill="#FFFFFF" opacity="0.9" />
+  </g>
+
+  <g transform="translate(190,40)" font-family="Inter, Helvetica, Arial, sans-serif">
+    <text x="0" y="18" font-size="30" font-weight="700" fill="#0F172A">BloodConnect <tspan fill="url(#textGradient)">CRM</tspan></text>
+    <text x="0" y="46" font-size="13" fill="#475569">Intelligence for life-saving response</text>
+    <text x="0" y="66" font-size="11" fill="#6B7280">Smart donor matching · Emergency readiness · Hospital visibility</text>
+  </g>
+</svg>

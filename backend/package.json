@@ -1,0 +1,28 @@
+{
+  "name": "bloodconnect-crm-ai-backend",
+  "version": "2.0.0",
+  "description": "Blood Donar CRM AI 2.0 - Hospital Grade SaaS Backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-validator": "^7.0.0",
+    "jsonwebtoken": "^9.0.1",
+    "mongoose": "^7.5.0",
+    "openai": "^4.28.0",
+    "@anthropic-ai/sdk": "*",
+    "pdfkit": "^0.13.0",
+    "exceljs": "^4.3.0",
+    "nodemailer": "^6.9.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

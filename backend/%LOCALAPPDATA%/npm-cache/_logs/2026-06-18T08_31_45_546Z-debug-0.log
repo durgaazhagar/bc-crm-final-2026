@@ -1,0 +1,45 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.12.1
+2 info using node@v24.15.0
+3 silly config load:file:C:\Program Files\nodejs\node_modules\npm\npmrc
+4 silly config load:file:C:\Users\hp5cd\blood donar crm\backend\.npmrc
+5 silly config load:file:C:\Users\hp5cd\.npmrc
+6 silly config load:file:C:\Users\hp5cd\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm install vite
+8 verbose argv "install" "--no-save" "vite"
+9 verbose logfile logs-max:10 dir:C:\Users\hp5cd\blood donar crm\backend\%LOCALAPPDATA%\npm-cache\_logs\2026-06-18T08_31_45_546Z-
+10 verbose logfile C:\Users\hp5cd\blood donar crm\backend\%LOCALAPPDATA%\npm-cache\_logs\2026-06-18T08_31_45_546Z-debug-0.log
+11 silly logfile start cleaning logs, removing 1 files
+12 silly packumentCache heap:4496293888 maxSize:1124073472 maxEntrySize:562036736
+13 silly logfile done cleaning log files
+14 silly idealTree buildDeps
+15 silly fetch manifest vite@*
+16 silly packumentCache full:https://registry.npmjs.org/vite cache-miss
+17 silly placeDep ROOT vite@ OK for: bloodconnect-crm-ai-backend@2.0.0 want: *
+18 verbose type system
+19 verbose stack FetchError: Invalid response body while trying to fetch https://registry.npmjs.org/vite: ENOSPC: no space left on device, write
+19 verbose stack     at C:\Program Files\nodejs\node_modules\npm\node_modules\minipass-fetch\lib\body.js:174:15
+19 verbose stack     at async Response.json (C:\Program Files\nodejs\node_modules\npm\node_modules\minipass-fetch\lib\body.js:75:17)
+19 verbose stack     at async RegistryFetcher.packument (C:\Program Files\nodejs\node_modules\npm\node_modules\pacote\lib\registry.js:98:25)
+19 verbose stack     at async RegistryFetcher.manifest (C:\Program Files\nodejs\node_modules\npm\node_modules\pacote\lib\registry.js:128:23)
+19 verbose stack     at async #fetchManifest (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\build-ideal-tree.js:1227:20)
+19 verbose stack     at async #nodeFromEdge (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\build-ideal-tree.js:1061:19)
+19 verbose stack     at async #buildDepStep (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\build-ideal-tree.js:917:11)
+19 verbose stack     at async Arborist.buildIdealTree (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\build-ideal-tree.js:170:7)
+19 verbose stack     at async Promise.all (index 1)
+19 verbose stack     at async Arborist.reify (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\reify.js:111:5)
+20 error code ENOSPC
+21 error syscall write
+22 error errno ENOSPC
+23 error nospc Invalid response body while trying to fetch https://registry.npmjs.org/vite: ENOSPC: no space left on device, write
+24 error nospc There appears to be insufficient space on your system to finish.
+24 error nospc Clear up some disk space and try again.
+25 silly unfinished npm timer reify 1781771506659
+26 silly unfinished npm timer reify:loadTrees 1781771506666
+27 verbose cwd C:\Users\hp5cd\blood donar crm\backend
+28 verbose os Windows_NT 10.0.22631
+29 verbose node v24.15.0
+30 verbose npm  v11.12.1
+31 verbose exit 1
+32 verbose code 1
+33 error A complete log of this run can be found in: C:\Users\hp5cd\blood donar crm\backend\%LOCALAPPDATA%\npm-cache\_logs\2026-06-18T08_31_45_546Z-debug-0.log
