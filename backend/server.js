@@ -22,10 +22,31 @@ console.log('='.repeat(60));
 
 const app = express();
 // Strict CORS for local development and known frontends
+// Configure CORS to allow the known frontend(s).
+// Use FRONTEND_URL env var when provided (recommended for production),
+// otherwise fall back to known local dev origins and the Vercel frontend.
+const allowedOrigins = new Set([
+  'http://localhost:5173',
+  'http://localhost:3000',
+  'http://localhost:4173',
+  'http://localhost:4174',
+  'http://localhost:4177',
+  'https://bc-crm-final-2026.vercel.app',
+]);
+
+if (process.env.FRONTEND_URL) {
+  allowedOrigins.add(process.env.FRONTEND_URL);
+}
+
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:3000', 'http://localhost:4173', 'http://localhost:4174', 'http://localhost:4177'],
+  origin: (origin, callback) => {
+    // Allow non-browser requests like curl/servers (no origin)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.has(origin)) return callback(null, true);
+    return callback(new Error('CORS policy: origin not allowed'), false);
+  },
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-  credentials: true
+  credentials: true,
 }));
 app.use(express.json());
 app.use(require('./middleware/logger'));

@@ -1,0 +1,18 @@
+# Render service manifest for BloodConnect backend
+# Copy this file to the repo root to enable Render's Infrastructure as Code deploys.
+# Do NOT commit secrets to this file — set them in the Render dashboard or via the CLI.
+
+services:
+  - type: web
+    name: bloodconnect-backend
+    env: node
+    branch: main
+    plan: free
+    region: oregon
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && npm start
+    # Do not store secrets here; use Render dashboard to set these environment variables:
+    # - MONGO_URI
+    # - JWT_SECRET
+    # - FRONTEND_URL
+    # Optional values you can set in the dashboard: AUTH_FALLBACK, EMAIL_SERVICE, EMAIL_USER, EMAIL_PASSWORD
