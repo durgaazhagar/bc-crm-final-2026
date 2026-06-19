@@ -58,11 +58,20 @@ router.get('/fallback-status', (req, res) => {
 
 router.post('/register', async (req, res) => {
   const { name, email, password, confirmPassword, role = 'admin' } = req.body;
-  if (!name || !email || !password || !confirmPassword) {
+
+  console.log('Register payload:', {
+    name: name ? '[REDACTED]' : null,
+    email: email ? email.toString().trim().toLowerCase() : null,
+    hasPassword: Boolean(password),
+    hasConfirmPassword: Boolean(confirmPassword),
+    role,
+  });
+
+  if (!name || !email || !password) {
     return res.status(400).json({ message: 'Name, email and password are required.' });
   }
 
-  if (password !== confirmPassword) {
+  if (confirmPassword && password !== confirmPassword) {
     return res.status(400).json({ message: 'Passwords do not match' });
   }
 
