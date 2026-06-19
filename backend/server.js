@@ -11,9 +11,6 @@ dotenv.config({ path: envPath });
 // Initialize Express app
 const app = express();
 
-// Fix __dirname for root-level execution
-const __dirname = path.resolve();
-
 console.log('='.repeat(60));
 console.log('BloodConnect CRM - Backend Starting');
 console.log('='.repeat(60));
@@ -49,7 +46,7 @@ try {
 }
 
 // 2. Serve React build (static files)
-const distPath = path.join(__dirname, 'frontend/dist');
+const distPath = path.join(__dirname, '..', 'frontend', 'dist');
 app.use(express.static(distPath));
 
 // 3. SPA Fallback (VERY IMPORTANT - must be last)
