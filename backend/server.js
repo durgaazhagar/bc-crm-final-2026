@@ -34,6 +34,7 @@ app.use(cors({
   credentials: true
 }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(require('./middleware/logger'));
 
 // 1. API Routes FIRST (under /api namespace)
