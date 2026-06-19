@@ -33,12 +33,21 @@ app.use(require('./middleware/logger'));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/donors', require('./routes/donors'));
 app.use('/api/emergency', require('./routes/emergency'));
+app.use('/api/dispatch', require('./routes/dispatch'));
 app.use('/api/analytics', require('./routes/analytics'));
 app.use('/api/ai', require('./routes/ai'));
 app.use('/api/chat', require('./routes/chat'));
 
 app.get('/api/status', (req, res) => {
   res.json({ status: 'ok', service: 'BloodConnect CRM AI Backend' });
+});
+
+// Serve frontend static files
+app.use(express.static(path.join(__dirname, 'frontend/dist')));
+
+// SPA fallback: serve index.html for all non-API routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend/dist/index.html'));
 });
 
 // Start server with fallback: try env PORT, else default 5010.

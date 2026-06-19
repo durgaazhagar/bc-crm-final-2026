@@ -9,10 +9,11 @@ services:
     branch: main
     plan: free
     region: oregon
-    buildCommand: cd backend && npm install
-    startCommand: cd backend && npm start
+    buildCommand: cd frontend && npm install && npm run build
+    startCommand: node backend/server.js
     # Do not store secrets here; use Render dashboard to set these environment variables:
     # - MONGO_URI
     # - JWT_SECRET
     # - FRONTEND_URL
+    # - VITE_API_URL (e.g., https://bc-crm-final-2026-8.onrender.com/api)
     # Optional values you can set in the dashboard: AUTH_FALLBACK, EMAIL_SERVICE, EMAIL_USER, EMAIL_PASSWORD
