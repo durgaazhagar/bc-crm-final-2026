@@ -75,12 +75,14 @@ const App = () => {
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/app/register" element={<RegisterPage />} />
-      <Route path="/dashboard/admin" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
+      <Route path="/dashboard/admin" element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
+        <Route index element={<DashboardPage />} />
+      </Route>
       <Route path="/dashboard/hospital" element={<ProtectedRoute><HospitalPage /></ProtectedRoute>} />
       <Route path="/dashboard/bloodbank" element={<ProtectedRoute><BloodBankDashboardPage /></ProtectedRoute>} />
       <Route path="/dashboard/volunteer" element={<ProtectedRoute><VolunteerDashboardPage /></ProtectedRoute>} />
       <Route path="/app" element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
-        <Route path="dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
+        <Route path="dashboard" element={<DashboardPage />} />
         <Route path="donors" element={<ProtectedRoute><DonorManagementPage /></ProtectedRoute>} />
         <Route path="hospitals" element={<ProtectedRoute><HospitalPage /></ProtectedRoute>} />
         <Route path="patients" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
