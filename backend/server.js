@@ -21,9 +21,19 @@ console.log('AUTH_FALLBACK:', process.env.AUTH_FALLBACK === 'true' ? '✓ Enable
 console.log('='.repeat(60));
 
 const app = express();
-// Strict CORS for local development and known frontends
+// CORS configuration - allow Render deployment and localhost for development
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:3000',
+  'http://localhost:4173',
+  'http://localhost:4174',
+  'http://localhost:4177',
+  'https://bc-crm-final-2026-8.onrender.com',
+  process.env.FRONTEND_URL // Allow custom frontend URL if set
+].filter(Boolean);
+
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:3000', 'http://localhost:4173', 'http://localhost:4174', 'http://localhost:4177'],
+  origin: allowedOrigins,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
   credentials: true
 }));
@@ -42,12 +52,33 @@ app.get('/api/status', (req, res) => {
   res.json({ status: 'ok', service: 'BloodConnect CRM AI Backend' });
 });
 
+app.get('/', (req, res) => {
+  res.json({
+    status: 'running',
+    message: 'BloodConnect CRM Backend is live'
+  });
+});
+
 // Serve frontend static files
-app.use(express.static(path.join(__dirname, 'frontend/dist')));
+// __dirname is backend/ when run as "node backend/server.js" from root
+// So we need to go up one level to reach frontend/dist
+const distPath = path.resolve(__dirname, '..', 'frontend', 'dist');
+console.log(`Static files path: ${distPath}`);
+app.use(express.static(distPath));
 
 // SPA fallback: serve index.html for all non-API routes
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend/dist/index.html'));
+  const indexPath = path.join(distPath, 'index.html');
+  res.sendFile(indexPath, (err) => {
+    if (err) {
+      console.error('Error serving index.html:', err.message);
+      res.status(500).json({ 
+        error: 'Frontend not available', 
+        details: 'Build may still be in progress or dist folder is missing',
+        distPath: distPath
+      });
+    }
+  });
 });
 
 // Start server with fallback: try env PORT, else default 5010.
