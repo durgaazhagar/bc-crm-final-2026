@@ -40,13 +40,27 @@ app.use(cors({
 app.use(express.json());
 app.use(require('./middleware/logger'));
 
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/donors', require('./routes/donors'));
-app.use('/api/emergency', require('./routes/emergency'));
-app.use('/api/dispatch', require('./routes/dispatch'));
-app.use('/api/analytics', require('./routes/analytics'));
-app.use('/api/ai', require('./routes/ai'));
-app.use('/api/chat', require('./routes/chat'));
+// Load routes with error handling
+try {
+  app.use('/api/auth', require('./routes/auth'));
+  console.log('✓ Auth route loaded');
+  app.use('/api/donors', require('./routes/donors'));
+  console.log('✓ Donors route loaded');
+  app.use('/api/emergency', require('./routes/emergency'));
+  console.log('✓ Emergency route loaded');
+  app.use('/api/dispatch', require('./routes/dispatch'));
+  console.log('✓ Dispatch route loaded');
+  app.use('/api/analytics', require('./routes/analytics'));
+  console.log('✓ Analytics route loaded');
+  app.use('/api/ai', require('./routes/ai'));
+  console.log('✓ AI route loaded');
+  app.use('/api/chat', require('./routes/chat'));
+  console.log('✓ Chat route loaded');
+} catch (err) {
+  console.error('✗ Error loading routes:', err.message);
+  console.error(err.stack);
+  process.exit(1);
+}
 
 app.get('/api/status', (req, res) => {
   res.json({ status: 'ok', service: 'BloodConnect CRM AI Backend' });
@@ -81,21 +95,29 @@ app.get('*', (req, res) => {
   });
 });
 
+// Error handling middleware (must be last)
+app.use((err, req, res, next) => {
+  console.error('Unhandled error:', err);
+  res.status(500).json({
+    error: 'Internal Server Error',
+    message: process.env.NODE_ENV === 'production' ? 'Something went wrong' : err.message
+  });
+});
+
 // Start server with fallback: try env PORT, else default 5010.
 const DEFAULT_PORT = 5010;
 const requestedPort = parseInt(process.env.PORT, 10) || DEFAULT_PORT;
 
-// Try a sequence of ports (DEFAULT_PORT..DEFAULT_PORT+9) if the preferred one is in use.
-const MAX_ATTEMPTS = 10;
-
 const startServer = (port, attempt = 0) => {
-  const srv = app.listen(port, () => {
+  // Render requires binding to 0.0.0.0, not localhost
+  const srv = app.listen(port, '0.0.0.0', () => {
     console.log(`BloodConnect CRM AI server running on port ${port}`);
+    console.log(`Listen address: 0.0.0.0:${port}`);
   });
 
   srv.on('error', (err) => {
     if (err && err.code === 'EADDRINUSE') {
-      if (attempt >= MAX_ATTEMPTS - 1) {
+      if (attempt >= 9) {
         console.error(`Port ${port} already in use and no fallback available. Exiting.`);
         process.exit(1);
       }
@@ -110,10 +132,15 @@ const startServer = (port, attempt = 0) => {
 };
 
 const startApp = async () => {
+  console.log('Initializing database connection...');
   const dbConnected = await connectDB();
   if (!dbConnected) {
-    console.error('⚠ MongoDB connection was not established. Auth fallback may be used if enabled.');
+    console.warn('⚠ MongoDB connection was not established. Auth fallback may be used if enabled.');
+  } else {
+    console.log('✓ MongoDB connected successfully');
   }
+  
+  console.log(`Starting server on port ${requestedPort}...`);
   startServer(requestedPort);
 };
 
