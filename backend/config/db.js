@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const dns = require('dns');
 
 let isConnected = false;
 
@@ -39,25 +38,6 @@ const connectDB = async () => {
   const uriType = mongoUri.includes('localhost') ? 'local MongoDB' : 'MongoDB Atlas';
   console.log(`\n📍 Attempting ${uriType} connection...`);
 
-  // Force public DNS servers for SRV lookups when the local resolver is likely unable to resolve external SRV records.
-  if (mongoUri.startsWith('mongodb+srv://')) {
-    const currentServers = dns.getServers();
-    const shouldFallback = currentServers.length === 0 || currentServers.some((s) => {
-      return s.startsWith('127.') || s.startsWith('10.') || s.startsWith('192.168.') || /^172\.(1[6-9]|2\d|3[0-1])\./.test(s);
-    });
-
-    console.log('🔧 Current DNS servers:', currentServers.join(', ') || 'none');
-
-    if (shouldFallback) {
-      console.log('🔧 Applying DNS fallback to public resolvers for SRV lookup.');
-      try {
-        dns.setServers(['8.8.8.8', '1.1.1.1']);
-      } catch (dnsError) {
-        console.warn('⚠ Could not set DNS servers for SRV lookup fallback:', dnsError.message || dnsError);
-      }
-    }
-  }
-
   const maxRetries = parseInt(process.env.DB_MAX_RETRIES, 10) || 5;
   const delayMs = parseInt(process.env.DB_INITIAL_DELAY_MS, 10) || 2000;
 
@@ -68,9 +48,8 @@ const connectDB = async () => {
         useUnifiedTopology: true,
       });
       isConnected = true;
-      const dbName = conn.connection.db?.databaseName || conn.connection.name || 'unknown';
       console.log(`✅ MongoDB connected successfully on ${conn.connection.host}`);
-      console.log(`📊 Database: ${dbName}`);
+      console.log(`📊 Database: ${conn.connection.db.name}`);
       return true;
     } catch (error) {
       isConnected = false;

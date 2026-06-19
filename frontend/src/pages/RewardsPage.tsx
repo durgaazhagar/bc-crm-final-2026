@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Award, Calendar, Crown, Gift, Heart, Medal, Star, Sparkles, Trophy, Users } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE } from '../services/config';
 
 const hallOfFame = [
   { rank: '🥇', name: 'Murugan Selvam', group: 'A+', donations: 24, city: 'Chennai', highlight: true },
@@ -88,7 +89,6 @@ const RewardsPage = () => {
 
     let donorId: string | null = null;
     try { const raw = localStorage.getItem('bloodconnect_user'); const parsed = raw ? JSON.parse(raw) : {}; donorId = parsed?.id || parsed?._id || null; } catch {}
-    const API_BASE = import.meta.env.VITE_API_URL || '/api';
 
     try {
       const token = localStorage.getItem('bloodconnect_token');

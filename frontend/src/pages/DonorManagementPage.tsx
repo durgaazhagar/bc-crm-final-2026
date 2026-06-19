@@ -6,30 +6,16 @@ import { Award, Activity, Building2, AlertCircle, TrendingUp, Users, Heart, Phon
 const initialForm = { name: '', bloodGroup: 'A+', location: '', phone: '', donations: 0, trustScore: 70, engagementLevel: 60, responseRate: 60, status: 'active', loyalty: 0, retentionScore: 100, availability: 'available', lastDonationDate: '2026-01-01' };
 
 const mockDonors = [
-  { _id: 'D001', id: 1, name: 'Murugan Selvam', bloodGroup: 'A+', city: 'Chennai', district: 'Chennai', location: 'Chennai', phone: '9841001234', donations: 6, trustScore: 89, status: 'active', loyalty: 620, retentionScore: 90, lastDonation: '2025-05-18', availability: 'available' },
-  { _id: 'D002', id: 2, name: 'Kavitha Rajan', bloodGroup: 'B+', city: 'Coimbatore', district: 'Coimbatore', location: 'Coimbatore', phone: '9842002345', donations: 5, trustScore: 87, status: 'active', loyalty: 540, retentionScore: 88, lastDonation: '2025-04-22', availability: 'available' },
-  { _id: 'D003', id: 3, name: 'Senthil Kumar', bloodGroup: 'O+', city: 'Madurai', district: 'Madurai', location: 'Madurai', phone: '9843003456', donations: 8, trustScore: 91, status: 'active', loyalty: 730, retentionScore: 92, lastDonation: '2025-03-12', availability: 'available' },
-  { _id: 'D004', id: 4, name: 'Priya Lakshmi', bloodGroup: 'A-', city: 'Tiruchirappalli', district: 'Tiruchirappalli', location: 'Tiruchirappalli', phone: '9844004567', donations: 4, trustScore: 84, status: 'active', loyalty: 430, retentionScore: 86, lastDonation: '2024-12-05', availability: 'available' },
-  { _id: 'D005', id: 5, name: 'Arun Prakash', bloodGroup: 'B-', city: 'Salem', district: 'Salem', location: 'Salem', phone: '9845005678', donations: 7, trustScore: 88, status: 'active', loyalty: 610, retentionScore: 88, lastDonation: '2024-11-16', availability: 'available' },
-  { _id: 'D006', id: 6, name: 'Deepa Sundaram', bloodGroup: 'AB+', city: 'Tirunelveli', district: 'Tirunelveli', location: 'Tirunelveli', phone: '9846006789', donations: 3, trustScore: 83, status: 'active', loyalty: 320, retentionScore: 84, lastDonation: '2025-02-28', availability: 'available' },
-  { _id: 'D007', id: 7, name: 'Vijay Anand', bloodGroup: 'O-', city: 'Erode', district: 'Erode', location: 'Erode', phone: '9847007890', donations: 9, trustScore: 92, status: 'active', loyalty: 810, retentionScore: 93, lastDonation: '2025-05-11', availability: 'available' },
-  { _id: 'D008', id: 8, name: 'Sangeetha Mohan', bloodGroup: 'A+', city: 'Vellore', district: 'Vellore', location: 'Vellore', phone: '9848008901', donations: 5, trustScore: 88, status: 'active', loyalty: 560, retentionScore: 89, lastDonation: '2024-10-08', availability: 'available' },
-  { _id: 'D009', id: 9, name: 'Karthik Raja', bloodGroup: 'B+', city: 'Thanjavur', district: 'Thanjavur', location: 'Thanjavur', phone: '9849009012', donations: 6, trustScore: 87, status: 'active', loyalty: 590, retentionScore: 88, lastDonation: '2025-01-19', availability: 'available' },
-  { _id: 'D010', id: 10, name: 'Lavanya Devi', bloodGroup: 'O+', city: 'Tiruppur', district: 'Tiruppur', location: 'Tiruppur', phone: '9840010123', donations: 7, trustScore: 90, status: 'active', loyalty: 700, retentionScore: 91, lastDonation: '2024-12-28', availability: 'available' },
-  { _id: 'D011', id: 11, name: 'Balamurugan S', bloodGroup: 'AB-', city: 'Dindigul', district: 'Dindigul', location: 'Dindigul', phone: '9841011234', donations: 4, trustScore: 85, status: 'inactive', loyalty: 440, retentionScore: 86, lastDonation: '2024-09-14', availability: 'unavailable' },
-  { _id: 'D012', id: 12, name: 'Nithya Krishnan', bloodGroup: 'A+', city: 'Kanchipuram', district: 'Kanchipuram', location: 'Kanchipuram', phone: '9842012345', donations: 6, trustScore: 89, status: 'active', loyalty: 620, retentionScore: 90, lastDonation: '2025-03-03', availability: 'available' },
-  { _id: 'D013', id: 13, name: 'Rajesh Pandian', bloodGroup: 'B+', city: 'Cuddalore', district: 'Cuddalore', location: 'Cuddalore', phone: '9843013456', donations: 5, trustScore: 87, status: 'active', loyalty: 560, retentionScore: 88, lastDonation: '2025-04-09', availability: 'available' },
-  { _id: 'D014', id: 14, name: 'Meena Selvakumar', bloodGroup: 'O+', city: 'Nagapattinam', district: 'Nagapattinam', location: 'Nagapattinam', phone: '9844014567', donations: 8, trustScore: 91, status: 'active', loyalty: 820, retentionScore: 92, lastDonation: '2024-08-22', availability: 'available' },
-  { _id: 'D015', id: 15, name: 'Suresh Babu', bloodGroup: 'A-', city: 'Namakkal', district: 'Namakkal', location: 'Namakkal', phone: '9845015678', donations: 5, trustScore: 86, status: 'inactive', loyalty: 570, retentionScore: 87, lastDonation: '2025-02-15', availability: 'unavailable' },
-  { _id: 'D016', id: 16, name: 'Anitha Ramesh', bloodGroup: 'B-', city: 'Virudhunagar', district: 'Virudhunagar', location: 'Virudhunagar', phone: '9846016789', donations: 4, trustScore: 84, status: 'active', loyalty: 430, retentionScore: 85, lastDonation: '2024-11-26', availability: 'available' },
-  { _id: 'D017', id: 17, name: 'Ganesh Murthy', bloodGroup: 'AB+', city: 'Ramanathapuram', district: 'Ramanathapuram', location: 'Ramanathapuram', phone: '9847017890', donations: 6, trustScore: 89, status: 'active', loyalty: 600, retentionScore: 89, lastDonation: '2025-01-02', availability: 'available' },
-  { _id: 'D018', id: 18, name: 'Saranya Vel', bloodGroup: 'O-', city: 'Pudukkottai', district: 'Pudukkottai', location: 'Pudukkottai', phone: '9848018901', donations: 5, trustScore: 88, status: 'active', loyalty: 540, retentionScore: 88, lastDonation: '2024-10-30', availability: 'available' },
-  { _id: 'D019', id: 19, name: 'Manikandan P', bloodGroup: 'A+', city: 'Sivaganga', district: 'Sivaganga', location: 'Sivaganga', phone: '9849019012', donations: 7, trustScore: 90, status: 'active', loyalty: 710, retentionScore: 91, lastDonation: '2025-03-24', availability: 'available' },
-  { _id: 'D020', id: 20, name: 'Divya Bharathi', bloodGroup: 'B+', city: 'Theni', district: 'Theni', location: 'Theni', phone: '9840010124', donations: 6, trustScore: 88, status: 'inactive', loyalty: 590, retentionScore: 89, lastDonation: '2024-12-04', availability: 'unavailable' },
-  { _id: 'D021', id: 21, name: 'Prakash Sundar', bloodGroup: 'O+', city: 'Karur', district: 'Karur', location: 'Karur', phone: '9841011235', donations: 7, trustScore: 90, status: 'active', loyalty: 700, retentionScore: 91, lastDonation: '2025-01-21', availability: 'available' },
-  { _id: 'D022', id: 22, name: 'Revathi Annamalai', bloodGroup: 'AB+', city: 'Perambalur', district: 'Perambalur', location: 'Perambalur', phone: '9842012346', donations: 5, trustScore: 87, status: 'active', loyalty: 560, retentionScore: 88, lastDonation: '2024-09-29', availability: 'available' },
-  { _id: 'D023', id: 23, name: 'Sundaram Pillai', bloodGroup: 'A-', city: 'Ariyalur', district: 'Ariyalur', location: 'Ariyalur', phone: '9843013457', donations: 4, trustScore: 85, status: 'active', loyalty: 440, retentionScore: 86, lastDonation: '2025-02-10', availability: 'available' },
-  { _id: 'D024', id: 24, name: 'Malathi Gopal', bloodGroup: 'B+', city: 'Krishnagiri', district: 'Krishnagiri', location: 'Krishnagiri', phone: '9844014568', donations: 6, trustScore: 88, status: 'active', loyalty: 590, retentionScore: 89, lastDonation: '2024-11-08', availability: 'available' },
+  { _id: 'D001', name: 'Gopi', bloodGroup: 'O+', district: 'Chennai', location: 'Chennai', phone: '9000012345', donations: 12, trustScore: 96, status: 'active', loyalty: 1200, retentionScore: 94, lastDonation: '2026-05-12', availability: 'available', badge: 'Platinum Guardian', priority: 'High' },
+  { _id: 'D002', name: 'Dinesh', bloodGroup: 'B+', district: 'Coimbatore', location: 'Coimbatore', phone: '9000012346', donations: 8, trustScore: 89, status: 'active', loyalty: 800, retentionScore: 89, lastDonation: '2026-04-25', availability: 'busy', badge: 'Gold Donor' },
+  { _id: 'D003', name: 'Malathika', bloodGroup: 'A+', district: 'Madurai', location: 'Madurai', phone: '9000012347', donations: 6, trustScore: 85, status: 'active', loyalty: 600, retentionScore: 85, lastDonation: '2026-03-18', availability: 'available', badge: 'Silver Donor' },
+  { _id: 'D004', name: 'Ganesh', bloodGroup: 'O-', district: 'Tirunelveli', location: 'Tirunelveli', phone: '9000012348', donations: 10, trustScore: 92, status: 'active', loyalty: 1000, retentionScore: 90, lastDonation: '2026-06-05', availability: 'available', badge: 'Platinum Guardian', priority: 'High', rareBlood: true },
+  { _id: 'D005', name: 'Devatamil', bloodGroup: 'AB+', district: 'Salem', location: 'Salem', phone: '9000012349', donations: 7, trustScore: 88, status: 'inactive', loyalty: 700, retentionScore: 88, lastDonation: '2026-04-29', availability: 'unavailable', badge: 'Gold Donor' },
+  { _id: 'D006', name: 'Praveen', bloodGroup: 'B-', district: 'Erode', location: 'Erode', phone: '9000012350', donations: 9, trustScore: 91, status: 'active', loyalty: 900, retentionScore: 91, lastDonation: '2026-05-14', availability: 'available', badge: 'Platinum Guardian' },
+  { _id: 'D007', name: 'Pratiksha', bloodGroup: 'A-', district: 'Thanjavur', location: 'Thanjavur', phone: '9000012351', donations: 5, trustScore: 83, status: 'active', loyalty: 500, retentionScore: 82, lastDonation: '2026-04-21', availability: 'busy', badge: 'Silver Donor' },
+  { _id: 'D008', name: 'Durga', bloodGroup: 'O+', district: 'Vellore', location: 'Vellore', phone: '9000012352', donations: 11, trustScore: 94, status: 'active', loyalty: 1100, retentionScore: 93, lastDonation: '2026-06-03', availability: 'available', badge: 'Platinum Guardian', priority: 'High' },
+  { _id: 'D009', name: 'Nithish', bloodGroup: 'AB-', district: 'Kanchipuram', location: 'Kanchipuram', phone: '9000012353', donations: 8, trustScore: 90, status: 'inactive', loyalty: 800, retentionScore: 90, lastDonation: '2026-05-11', availability: 'unavailable', badge: 'Gold Donor', priority: 'High', rareBlood: true },
+  { _id: 'D010', name: 'Gokulan', bloodGroup: 'B+', district: 'Tiruppur', location: 'Tiruppur', phone: '9000012354', donations: 6, trustScore: 86, status: 'active', loyalty: 600, retentionScore: 86, lastDonation: '2026-04-27', availability: 'available', badge: 'Silver Donor' },
 ];
 
 const hospitals = [
@@ -542,7 +528,6 @@ const DonorManagementPage = () => {
                 <option value="">Any Status</option>
                 <option value="active">Active</option>
                 <option value="inactive">Inactive</option>
-                <option value="unavailable">Unavailable</option>
               </select>
               <button className="button-secondary" onClick={() => { setQuery(''); setSelectedBloodGroup(''); setFilterDistrict(''); setFilterAvailability(''); setFilterStatus(''); }}>Clear</button>
               <button className="button-primary px-6 py-2 flex items-center gap-2 font-bold bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 shadow-lg shadow-emerald-500/30 text-white" onClick={callTop3NearestDonors}><PhoneCall className="h-4 w-4" />Call Top 3</button>
@@ -571,58 +556,61 @@ const DonorManagementPage = () => {
               <table className="min-w-[1200px] text-left text-sm text-slate-200">
                 <thead className="sticky top-0 bg-slate-950/95 text-slate-400 backdrop-blur-xl">
                   <tr>
-                    {['Name','Phone','Blood Group','City','Last Donation Date','Status','Actions'].map(h => <th key={h} className="px-4 py-3 text-left uppercase tracking-[0.12em] whitespace-nowrap">{h}</th>)}
+                    {['Name','Phone Number','Blood Group','District','Donations','Loyalty Points','Retention Score','Availability','Actions'].map(h => <th key={h} className="px-4 py-3 text-left uppercase tracking-[0.12em] whitespace-nowrap">{h}</th>)}
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/8">
                   {loading ? (
-                    <tr><td colSpan={7} className="px-4 py-6 text-center text-slate-400">Loading donors...</td></tr>
+                    <tr><td colSpan={9} className="px-4 py-6 text-center text-slate-400">Loading donors...</td></tr>
                   ) : paginatedDonors.length ? paginatedDonors.map(d => (
                     <tr key={d._id} className="hover:bg-white/5">
                       <td className="px-4 py-3">
-                        <div className="flex items-center gap-3">
-                          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-800 text-sm font-semibold text-slate-100">
-                            {d.name.split(' ').map((part: string) => part[0]).join('').slice(0, 2).toUpperCase()}
-                          </div>
-                          <div className="flex flex-col gap-1">
-                            <div className="font-semibold text-white">{d.name}</div>
-                            <div className="text-xs text-slate-400">{d.city || d.location || d.district}</div>
-                          </div>
+                        <div className="flex flex-col gap-1">
+                          <div className="font-semibold text-white">{d.name}</div>
+                          <div className="text-xs text-slate-400">{d.phone}</div>
                         </div>
                       </td>
-                      <td className="px-4 py-3 whitespace-nowrap text-slate-100">{d.phone}</td>
+                      <td className="px-4 py-3 whitespace-nowrap">{d.phone}</td>
+                      <td className="px-4 py-3 whitespace-nowrap">{d.bloodGroup}</td>
+                      <td className="px-4 py-3 whitespace-nowrap">{d.district || d.location}</td>
+                      <td className="px-4 py-3 whitespace-nowrap">{d.donations}</td>
+                      <td className="px-4 py-3 whitespace-nowrap">{d.loyalty ?? 0}</td>
+                    <td className="px-4 py-3 whitespace-nowrap">
+                      <div className="flex items-center gap-1 group cursor-help" title="Retention Score = (Active Donors ÷ Total Donors) × 100. Shows donor loyalty consistency.">
+                        <span>{d.retentionScore ?? 0}%</span>
+                        <span className="inline-block text-xs text-slate-500 opacity-0 group-hover:opacity-100 transition">ℹ</span>
+                      </div>
+                    </td>
                       <td className="px-4 py-3 whitespace-nowrap">
-                        <span className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${
-                          d.bloodGroup === 'A+' || d.bloodGroup === 'A-' ? 'bg-red-500/15 text-red-200' :
-                          d.bloodGroup === 'B+' || d.bloodGroup === 'B-' ? 'bg-sky-500/15 text-sky-200' :
-                          d.bloodGroup === 'O+' || d.bloodGroup === 'O-' ? 'bg-emerald-500/15 text-emerald-200' :
-                          d.bloodGroup === 'AB+' || d.bloodGroup === 'AB-' ? 'bg-violet-500/15 text-violet-200' :
-                          'bg-slate-500/15 text-slate-200'
+                        <span className={`rounded-full px-2 py-1 text-xs font-semibold ${
+                          d.availability === 'available'
+                            ? 'bg-emerald-500/10 text-emerald-300'
+                            : d.availability === 'busy'
+                            ? 'bg-amber-500/10 text-amber-300'
+                            : 'bg-red-500/10 text-red-300'
                         }`}>
-                          {d.bloodGroup}
-                        </span>
-                      </td>
-                      <td className="px-4 py-3 whitespace-nowrap">{d.city || d.location || d.district}</td>
-                      <td className="px-4 py-3 whitespace-nowrap">{d.lastDonation}</td>
-                      <td className="px-4 py-3 whitespace-nowrap">
-                        <span className={`rounded-full px-3 py-1 text-xs font-semibold ${
-                          d.status === 'active' ? 'bg-emerald-500/10 text-emerald-300' :
-                          d.status === 'unavailable' ? 'bg-amber-500/10 text-amber-200' :
-                          'bg-slate-500/10 text-slate-300'
-                        }`}>
-                          {d.status === 'active' ? 'Active' : d.status === 'unavailable' ? 'Unavailable' : 'Inactive'}
+                          {d.availability === 'available' ? '🟢 Available' : d.availability === 'busy' ? '🟡 Busy' : '🔴 Unavailable'}
                         </span>
                       </td>
                       <td className="px-4 py-3">
                         <div className="flex flex-wrap gap-2">
-                          <button className="rounded-2xl bg-slate-700/80 px-3 py-2 text-xs font-semibold text-slate-100 transition hover:bg-slate-600" onClick={() => openProfile(d)}>View</button>
-                          <button className="rounded-2xl bg-cyan-500/15 px-3 py-2 text-xs font-semibold text-cyan-200 transition hover:bg-cyan-500/25" onClick={() => handleEdit(d)}>Edit</button>
-                          <button className="rounded-2xl bg-red-500/15 px-3 py-2 text-xs font-semibold text-red-200 transition hover:bg-red-500/25" onClick={() => handleDelete(d._id)}>Delete</button>
+                          <button className="rounded-2xl bg-emerald-500/15 px-3 py-2 text-xs font-semibold text-emerald-200 transition hover:bg-emerald-500/25" onClick={() => quickCall(d.phone)}>Call Now</button>
+                          <button
+                            className="rounded-2xl bg-cyan-500/15 px-3 py-2 text-xs font-semibold text-cyan-200 transition hover:bg-cyan-500/25 disabled:cursor-not-allowed disabled:opacity-50"
+                            onClick={() => handleSendAlert(d)}
+                            disabled={alertSendingId === getAlertKey(d) || hasRecentAlert(d)}
+                          >
+                            {alertSendingId === getAlertKey(d) ? 'Sending...' : getAlertButtonText(d)}
+                          </button>
+                          <button className="rounded-2xl bg-violet-500/15 px-3 py-2 text-xs font-semibold text-violet-200 transition hover:bg-violet-500/25 flex items-center gap-1" onClick={() => handleTrackDonorFromList(d)}>
+                            <MapPin className="h-3 w-3" /> Track
+                          </button>
+                          <button className="rounded-2xl bg-white/10 px-3 py-2 text-xs transition hover:bg-white/20" onClick={() => openProfile(d)}>Details</button>
                         </div>
                       </td>
                     </tr>
                   )) : (
-                    <tr><td colSpan={7} className="px-4 py-6 text-center text-yellow-100">⚠️ {selectedBloodGroup ? `No donors available for ${selectedBloodGroup}` : 'No donors available in this district.'}</td></tr>
+                    <tr><td colSpan={9} className="px-4 py-6 text-center text-yellow-100">⚠️ {selectedBloodGroup ? `No donors available for ${selectedBloodGroup}` : 'No donors available in this district.'}</td></tr>
                   )}
                 </tbody>
               </table>

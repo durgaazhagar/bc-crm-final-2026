@@ -14,7 +14,6 @@ import {
 } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import api from '../services/api';
-import SharedNavbar from '../components/SharedNavbar';
 
 // Custom Icon Components with 3D styling and gradients
 const SmartDonorIcon = () => (
@@ -304,9 +303,23 @@ const LandingPage = () => {
 
   return (
     <div className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,_rgba(248,113,113,0.18),_transparent_24%),radial-gradient(circle_at_bottom_right,_rgba(59,130,246,0.16),_transparent_28%),linear-gradient(180deg,#02060d_0%,#0f172a_100%)] text-slate-100">
-      <SharedNavbar isLoggedIn={false} />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(248,113,113,0.25),transparent_30%),radial-gradient(circle_at_bottom,_rgba(59,130,246,0.18),transparent_32%)]" />
       <div className="relative z-10 mx-auto max-w-7xl px-6 py-6 sm:px-8 lg:px-10">
+        <header className="flex flex-wrap items-center justify-between gap-4 py-4">
+          <Link to="/" className="inline-flex items-center gap-3 text-lg font-bold tracking-wide text-white">
+            <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 text-red-300 shadow-[0_0_30px_rgba(248,113,113,0.2)]">B</span>
+            BloodConnect
+          </Link>
+          <nav className="flex flex-wrap items-center gap-4 text-sm text-slate-300">
+            <Link to="/#home" className="transition hover:text-white">Home</Link>
+            <Link to="/#features" className="transition hover:text-white">Features</Link>
+            <Link to="/#about" className="transition hover:text-white">About</Link>
+            <Link to="/#contact" className="transition hover:text-white">Contact</Link>
+            <Link to="/app/register" className="rounded-full border border-white/15 bg-white/5 px-5 py-2 text-white transition hover:bg-white/10">Register</Link>
+            <Link to="/app/register" className="rounded-full bg-red-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-red-500">Register</Link>
+          </nav>
+        </header>
+
         <main id="home" className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-10">
           <motion.section
             initial={{ opacity: 0, y: 24 }}

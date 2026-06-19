@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { API_BASE } from '../services/config';
 
 const RewardsHistoryPage: React.FC = () => {
   const [history, setHistory] = useState<any[]>([]);
@@ -10,7 +11,6 @@ const RewardsHistoryPage: React.FC = () => {
         const rawUser = localStorage.getItem('bloodconnect_user');
         const parsed = rawUser ? JSON.parse(rawUser) : {};
         const donorId = parsed?.id || parsed?._id || null;
-        const API_BASE = import.meta.env.VITE_API_URL || '/api';
         const token = localStorage.getItem('bloodconnect_token');
         const headers: Record<string, string> = {};
         if (token) headers['Authorization'] = `Bearer ${token}`;

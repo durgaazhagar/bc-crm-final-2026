@@ -12,12 +12,10 @@ const RegisterPage = () => {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
-  const [showResetLink, setShowResetLink] = useState(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
     setError('');
-    setShowResetLink(false);
   };
 
   const handleSubmit = async (e: FormEvent) => {
@@ -50,7 +48,6 @@ const RegisterPage = () => {
         name: form.name,
         email: form.email,
         password: form.password,
-        confirmPassword: form.confirmPassword,
         role: form.role,
       });
 
@@ -83,14 +80,7 @@ const RegisterPage = () => {
       } else {
         // Show specific error messages from API (validation, conflict, etc.)
         const errorMessage = err.response?.data?.message || 'Unable to register. Please try again.';
-        // Improve user-facing message for existing account conflicts
-        if (errorMessage.toLowerCase().includes('user already exists') || errorMessage.toLowerCase().includes('already exists')) {
-          setError('An account with this email already exists.');
-          setShowResetLink(true);
-        } else {
-          setError(errorMessage);
-          setShowResetLink(false);
-        }
+        setError(errorMessage);
       }
     } finally {
       setLoading(false);
@@ -215,16 +205,9 @@ const RegisterPage = () => {
             {loading ? 'Registering...' : 'Register'}
           </button>
         </form>
-        <div className="mt-6 text-center text-sm text-slate-200">
-          <p>Registration is the only access path for BloodConnect.</p>
-          {showResetLink ? (
-            <p>
-              An account with this email already exists. <Link to="/forgot-password" className="text-cyan-200 hover:text-white underline">Reset your password</Link> or contact your administrator.
-            </p>
-          ) : (
-            <p>If you already have an account, please contact your administrator for assistance.</p>
-          )}
-        </div>
+        <p className="mt-6 text-center text-sm text-slate-200">
+          Registration is the only access path for BloodConnect. If you already have an account, please contact your administrator for assistance.
+        </p>
       </motion.div>
     </div>
   );

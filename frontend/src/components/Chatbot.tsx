@@ -1,5 +1,6 @@
 import { FormEvent, useState, useRef, useEffect } from 'react';
 import api from '../services/api';
+import { API_BASE } from '../services/config';
 
 interface Message {
   id: string;
@@ -134,8 +135,7 @@ const Chatbot = ({ isGuest = false, userId, fullPage = false }: ChatbotProps) =>
       setShowChips(false);
 
       try {
-        const baseUrl = import.meta.env.VITE_API_URL || '/api';
-        const response = await fetch(`${baseUrl}/chat`, {
+        const response = await fetch(`${API_BASE}/chat`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

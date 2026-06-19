@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Award, Trophy } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE } from '../services/config';
 
 const badges = [
   { id: 'community', title: 'Community Builder', desc: 'Organized 3 drives' },
@@ -89,7 +90,6 @@ const VolunteerRewards: React.FC = () => {
       } catch {
         donorId = null;
       }
-      const API_BASE = import.meta.env.VITE_API_URL || '/api';
 
       try {
         // 1) POST /api/rewards/redeem

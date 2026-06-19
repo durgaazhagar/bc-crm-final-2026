@@ -1,9 +1,8 @@
 import axios from 'axios';
-
-const BASE = import.meta.env.VITE_API_URL || '/api';
+import { API_BASE } from './config';
 
 const api = axios.create({
-  baseURL: BASE,
+  baseURL: API_BASE,
 });
 
 api.interceptors.request.use((config) => {
@@ -36,18 +35,16 @@ export const aiService = {
   predictShortage: (body: any): Promise<any> => api.post('/ai/predict-shortage', body),
 };
 
+export const dispatchService = {
+  list: (filters: any): Promise<any> => api.get('/dispatch', { params: filters }),
+  assign: (id: string, data: any): Promise<any> => api.put(`/dispatch/${id}/assign`, data),
+  notify: (id: string): Promise<any> => api.post(`/dispatch/${id}/notify`),
+};
+
 export const authService = {
   requestPasswordReset: (payload: any): Promise<any> => api.post('/auth/forgot-password', payload),
   resetPassword: (payload: any): Promise<any> => api.post('/auth/reset-password', payload),
   register: (payload: any): Promise<any> => api.post('/auth/register', payload),
-};
-
-export const dispatchService = {
-  list: (params = {}) => api.get('/dispatch', { params }),
-  get: (id: string) => api.get(`/dispatch/${id}`),
-  create: (body: any) => api.post('/dispatch', body),
-  assign: (id: string, body: any) => api.put(`/dispatch/${id}/assign`, body),
-  notify: (id: string) => api.post(`/dispatch/${id}/notify`),
 };
 
 export default api;

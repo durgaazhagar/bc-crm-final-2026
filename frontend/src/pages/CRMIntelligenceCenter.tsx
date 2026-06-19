@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, AreaChart, Area, BarChart, Bar, CartesianGrid, PieChart, Pie, Cell, Legend } from 'recharts';
 import SectionCard from '../components/SectionCard';
 import { Trophy, Star, Users, Activity, Award } from 'lucide-react';
+import { API_BASE } from '../services/config';
 
 const tiers = [
   {
@@ -154,7 +155,7 @@ const CRMIntelligenceCenter = () => {
     setConfettiActive(true);
 
     try {
-      await fetch('/api/ai-reward-action', {
+      await fetch(`${API_BASE}/ai-reward-action`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, BarChart, Bar, PieChart, Pie, Cell, Legend, ReferenceLine } from 'recharts';
 import { Download, FileText, File, BarChart3, Users, Hospital, Megaphone } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE } from '../services/config';
 
 const sampleMonths = [
   { month: 'Jan', donations: 120, donors: 90, volunteers: 40 },
@@ -28,8 +29,6 @@ const DashboardReports: React.FC = () => {
   const navigate = useNavigate();
 
   const data = useMemo(() => sampleMonths, []);
-
-  const API_BASE = import.meta.env.VITE_API_URL || '/api';
 
   const doToast = (msg:string, type:'success'|'error'='success') => {
     setToast({msg,type});

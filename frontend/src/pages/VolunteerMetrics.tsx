@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { BarChart2, PieChart } from 'lucide-react';
 import { ResponsiveContainer, LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ReferenceLine } from 'recharts';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE } from '../services/config';
 
 const VolunteerMetrics: React.FC = () => {
   const navigate = useNavigate();
@@ -25,8 +26,7 @@ const VolunteerMetrics: React.FC = () => {
     // drill into reports for this date
     const month = 'Feb';
     navigate('/app/analytics');
-    const apiBase = import.meta.env.VITE_API_URL || '/api';
-    try { window.open(`${apiBase}/reports/drilldown?month=${month}&type=volunteer`); } catch (e) {}
+    try { window.open(`${API_BASE}/reports/drilldown?month=${month}&type=volunteer`); } catch (e) {}
   };
 
   return (
