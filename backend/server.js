@@ -48,16 +48,11 @@ try {
   process.exit(1);
 }
 
-// 2. Root health check
-app.get('/', (req, res) => {
-  res.json({ status: 'running', message: 'BloodConnect CRM Backend is live' });
-});
-
-// 3. Serve React build (static files)
+// 2. Serve React build (static files)
 const distPath = path.join(__dirname, 'frontend/dist');
 app.use(express.static(distPath));
 
-// 4. SPA Fallback (VERY IMPORTANT - must be last)
+// 3. SPA Fallback (VERY IMPORTANT - must be last)
 app.get('*', (req, res) => {
   res.sendFile(path.join(distPath, 'index.html'), (err) => {
     if (err) {
