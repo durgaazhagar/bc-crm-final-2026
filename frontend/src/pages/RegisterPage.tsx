@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Eye, EyeOff, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
-import api from '../services/api';
+import { API_BASE } from '../services/config';
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -44,25 +44,36 @@ const RegisterPage = () => {
 
     try {
       // Try to register with API
-      const response = await api.post('/auth/register', {
-        name: form.name,
-        email: form.email,
-        password: form.password,
-        role: form.role,
+      const response = await fetch(`${API_BASE}/auth/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          password: form.password,
+          role: form.role,
+        })
       });
 
-      if (response.data?.token) {
-        localStorage.setItem('bloodconnect_token', response.data.token);
+      const responseData = await response.json();
+      if (!response.ok) {
+        throw { response: { status: response.status, data: responseData } };
       }
 
-      if (response.data?.user) {
-        localStorage.setItem('bloodconnect_user', JSON.stringify(response.data.user));
+      if (responseData?.token) {
+        localStorage.setItem('bloodconnect_token', responseData.token);
+      }
+
+      if (responseData?.user) {
+        localStorage.setItem('bloodconnect_user', JSON.stringify(responseData.user));
       }
 
       setSuccessMessage('Registration successful');
       setError('');
 
-      const role = response.data?.user?.role || form.role || 'admin';
+      const role = responseData?.user?.role || form.role || 'admin';
       const roleRouteMap: Record<string, string> = {
         admin: '/dashboard/admin',
         hospital: '/dashboard/hospital',
